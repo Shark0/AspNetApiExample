@@ -26,5 +26,6 @@ namespace WebApplication1.Models
         }
     
         public virtual DbSet<PRODUCT> PRODUCT { get; set; }
+        public virtual DbSet<USER> USER { get; set; }
     }
 }

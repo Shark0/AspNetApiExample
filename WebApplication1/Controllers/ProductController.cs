@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Web.Http;
-using Swashbuckle.Swagger.Annotations;
+using Resources;
 using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
@@ -70,7 +68,7 @@ namespace WebApplication1.Controllers
 		[HttpGet]
 		public string Test()
 		{
-			return Resources.LanguageResource.test;
+			return LanguageResource.test;
 		}
 	}
 }
