@@ -268,8 +268,8 @@ namespace WebApplication1.Areas.HelpPage.ModelDescriptions
         {
             List<ParameterAnnotation> annotations = new List<ParameterAnnotation>();
 
-            IEnumerable<Attribute> attributes = property.GetCustomAttributes();
-            foreach (Attribute attribute in attributes)
+            IEnumerable<System.Attribute> attributes = property.GetCustomAttributes();
+            foreach (System.Attribute attribute in attributes)
             {
                 Func<object, string> textGenerator;
                 if (AnnotationTextGenerator.TryGetValue(attribute.GetType(), out textGenerator))
