@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http.Filters;
 using JWT;
 using JWT.Algorithms;
@@ -14,10 +16,10 @@ namespace WebApplication1.Attribute
             var request = actionContext.Request;
             if (request.Headers.Authorization == null)
             {
-                throw new Exception("Lost Token");
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return;
             }
             string jwt = request.Headers.Authorization.ToString();
-            Console.Out.WriteLine("jwt: " + jwt);
             string secret = "shark";
             try
             {
@@ -33,11 +35,13 @@ namespace WebApplication1.Attribute
             }
             catch (TokenExpiredException)
             {
-                throw new Exception("Token Expired");
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return;
             }
             catch (SignatureVerificationException)
             {
-                throw new Exception("Token Verify Failed");
+                actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                return;
             }
             base.OnActionExecuting(actionContext);
         }
